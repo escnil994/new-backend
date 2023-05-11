@@ -11,7 +11,7 @@ const { ValidateJwt } = require('../middlewares/validate-jwt')
 const router = Router()
 
 
-router.get('/get-posts/:limit?', getPosts)
+router.get('/get-posts/', getPosts)
 router.get('/get-post/:id', getPost)
 router.post('/create-new-post/', ValidateJwt,[
 check('title', 'EL titulo debe tener al menos 10 caracteres').not().isEmpty().isLength({min: 10}),

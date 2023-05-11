@@ -10,29 +10,26 @@ const Project = require("../models/project");
 
 const getPosts = async (req, res) => {
 
-    var limit =  req.params.limit
+    const limit = Number(req.query.limit) || 0
+
+    const from = Number(req.query.from) || 0
 
 
     try {
 
 
-        var posts
+        const posts = await Post.find().sort('date').skip(from).limit(limit)
 
-        if (limit === 'yes'){
-            posts = await Post.find().sort('date').limit(4)
 
-        }
-        else{
-            posts = await Post.find().sort('date')
-
-        }
+        const total = await Post.count()
 
 
 
         if (posts) {
             return res.status(200).json({
                 ok: true,
-                posts
+                posts,
+                total
             })
         } else {
             return res.status(500).json({
@@ -87,6 +84,8 @@ const getPost = async (req = request, res = response) => {
 
 }
 
+
+
 const createPost = async (req = request, res = response) => {
 
     const data = req.body
@@ -94,19 +93,12 @@ const createPost = async (req = request, res = response) => {
     try {
 
 
-        if (req.files && req.files !== null) {
 
-            const result = await uploadImage(req.files.image.tempFilePath)
-
-
-            data.image = {
-                public_id: result.public_id || 'null',
-                secure_url: result.secure_url || 'null'
-            }
-
-            await fs.unlink(req.files.image.tempFilePath)
-
+        data.image = {
+            public_id: "image-temp",
+            secure_url: "https://res.cloudinary.com/dorqesogu/image/upload/v1660412426/portafolio/smqwt4ot8l2vlclfxcjm.jpg"
         }
+
 
         const postToSave = new Post(data)
 
@@ -142,7 +134,7 @@ const createPost = async (req = request, res = response) => {
 }
 
 
-const updatePost = async(req = request, res = response) => {
+const updatePost = async (req = request, res = response) => {
 
     const { title, intro, content, url, author } = req.body;
 
@@ -159,7 +151,7 @@ const updatePost = async(req = request, res = response) => {
             })
         } else {
 
-            await Post.findByIdAndUpdate( id , {  title, intro, content, url, author })
+            await Post.findByIdAndUpdate(id, { title, intro, content, url, author })
 
 
             const postModified = await Post.findById(id);
@@ -170,7 +162,7 @@ const updatePost = async(req = request, res = response) => {
                     project: postModified,
                     msg: 'Project has been updated'
                 })
-            } else{
+            } else {
                 return res.json({
                     ok: false,
                     msg: 'Project not updated'

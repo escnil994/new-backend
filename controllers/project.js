@@ -8,31 +8,26 @@ const { isValidObjectId } = require('mongoose');
 
 const getProjects = async (req, res = response) => {
 
-    var limit = await req.params.limit
+    const limit = Number(req.query.limit) || 0
 
+    const from = Number(req.query.from) || 0
 
     try {
-
-        var getProjects
-
-        if (limit === 'yes') {
-            getProjects = await Project.find().sort('date').limit(4)
-        }
-        else {
-            getProjects = await Project.find().sort('date')
-        }
+        
+        const getProjects = await Project.find().sort('date').limit(limit).skip(from)
+        
 
 
         if (getProjects) {
             return res.status(200).json({
                 ok: true,
                 projects: getProjects,
-                cant: getProjects.lenght
+                total: await Project.count()
             })
         } else {
             return res.status(400).json({
                 ok: false,
-                msg: 'No se pudieron obtener el listado de projectos'
+                msg: 'No se pudieron obtener el listado de proyectos'
             })
 
         }

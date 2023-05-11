@@ -12,7 +12,7 @@ const {ValidateJwt} = require("../middlewares/validate-jwt");
 const router = Router()
 
 
-router.get('/get-projects/:limit?', getProjects)
+router.get('/get-projects', getProjects)
 router.get('/get-project/:id', getProject)
 router.post('/create-new-project/',[
     check('title', 'El titulo debe ser de al menos 8 caracteres').not().isEmpty().isLength({ min: 8 }),

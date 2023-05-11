@@ -28,7 +28,13 @@ const commentSchema = Schema({
         type: Boolean,
         required: true,
         default: false
-    }
+    }, 
+    for_id: {
+        required: false,
+        type: Schema.Types.ObjectId,
+        ref: 'Project' || 'Post',
+        default: null
+    },
 })
 
 module.exports = model('Comment', commentSchema)

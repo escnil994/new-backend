@@ -80,12 +80,7 @@ const createComment = async (req = request, res = response) => {
 
         const time = ((nowToday - commentDate) / calcDay).toPrecision(4);
 
-        if (time < 1) {
-          return res.status(500).json({
-            ok: false,
-            msg: "Lo siento, pero solo puedes comentar una vez cada 24 horas",
-          });
-        }
+        
       }
 
       const newComment = new Comment(req.body);

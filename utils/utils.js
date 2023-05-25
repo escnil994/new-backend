@@ -12,9 +12,8 @@ function contenido(commentSaved) {
       <br>
       <br>
       <strong>
-          <a href="http://localhost:3100/api/comment/autorize-comment/${commentSaved._id}">Para aprovar comentario haga clic aqui</a>
+          <a href="http://localhost:4200/comment/approve-comment/${commentSaved._id}">Para aprovar comentario haga clic aqui</a>
           <br>
-          <a href="http://localhost:4200/comments/autorize-comment/${commentSaved._id}">Para aprovar comentario haga clic aqui</a>
 
       </strong>
       
@@ -120,7 +119,71 @@ function passwordUpdated (data) {
   `;
 }
 
+function ContactForMe(commentSaved) {
+    return `
+  <div style="width: auto; color: black; margin: 20px; text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(196, 244, 250);">
+  
 
+        <br>
+            <h1>Someone wants to contact to you </h1>
+        
+        <br>
+        
+            <h4>${commentSaved.name}</h4>
+            <br>
+      <h4>${commentSaved.email}</h4>
+      
+      <br>
+      <span style="color:green;">"${commentSaved.message}"</span>
+
+
+      <br>
+      <br>
+      <strong>
+          <br>
+
+      </strong>
+      
+  </div>
+  `;
+}
+
+
+
+
+
+function contactToYou(comment) {
+    return `
+  <div style="width: auto; color: black; margin: 20px; text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: white;">
+      <h1>${comment.name}</h1>
+      <h4>Thanks for your message</h4>
+
+
+
+      <br>
+      <br>
+      <span style="color: darkred">Soon I'll reply your email.</span>
+
+      <br><br>
+      <a href="${'https://wa.me/50375068027/'}" style="color: green;"><strong>Whatsapp</strong></a>
+      <br><br>
+      <a href="${'https://facebook.com/escnil994/'}" style="color: blue;"><strong>facebook</strong></a>
+
+      <p> puedes encontrar mas en mi web en la pestaña
+          <strong>
+              <a href="https://escnil994.com/contacts">contactame</a>
+          </strong></p>
+
+      <span> Tambien puedes responder directamente a este correo</span>
+
+      <br>
+      <br><br>
+
+      <span style="color:#002a4a; font-size: 25px;"> Att. ${'Nilson Escobar - Escnil994'}</span>
+  </div>
+  `;
+
+}
 
 
 
@@ -129,6 +192,8 @@ module.exports = {
     contentHTML,
     contenido, 
     isValidObjectId, 
-    passwordUpdated
+    passwordUpdated,
+    ContactForMe,
+    contactToYou
 
 }

@@ -35,6 +35,11 @@ const commentSchema = Schema({
         ref: 'Project' || 'Post',
         default: null
     },
+    color: {
+        type: String,
+        required: true,
+        default: '#FFFFFF'
+    }
 })
 
 module.exports = model('Comment', commentSchema)

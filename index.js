@@ -39,6 +39,8 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/project', require('./routes/project'))
 app.use('/api/blog', require('./routes/blog'))
 app.use('/api/comment', require('./routes/comment'))
+app.use('/api/contact', require('./routes/contact'))
+
 
 
 app.listen(process.env.PORT, () => {

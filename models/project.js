@@ -22,7 +22,7 @@ const projectSchema = Schema({
         type: String,
         required: false
     },
-    comments: {
+    more: {
         type: String,
         required: false
     },

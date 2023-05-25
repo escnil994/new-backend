@@ -65,7 +65,7 @@ const getComments = async (req = request, res = response) => {
 };
 
 const createComment = async (req = request, res = response) => {
-  const { name, email, comment, for_id } = req.body;
+  const { name, email, comment, for_id, color } = req.body;
 
   try {
     if (name && email && comment) {

@@ -72,15 +72,10 @@ const createComment = async (req = request, res = response) => {
       const existComment = await Comment.findOne({ email });
 
       if (existComment) {
-        const calcDay = 1000 * 60 * 60 * 24;
 
         const nowToday = new Date();
 
-        const commentDate = existComment.date;
-
-        const time = ((nowToday - commentDate) / calcDay).toPrecision(4);
-
-        
+      
       }
 
       const newComment = new Comment(req.body);

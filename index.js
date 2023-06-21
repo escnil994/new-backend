@@ -35,12 +35,12 @@ app.use(fileUpload({
 
 
 //RUTAS
-app.use('/api/auth', require('./routes/auth'))
-app.use('/api/project', require('./routes/project'))
-app.use('/api/blog', require('./routes/blog'))
-app.use('/api/comment', require('./routes/comment'))
-app.use('/api/contact', require('./routes/contact'))
-app.use('/api/utils', require('./routes/utils'))
+app.use('/auth', require('./routes/auth'))
+app.use('/project', require('./routes/project'))
+app.use('/blog', require('./routes/blog'))
+app.use('/comment', require('./routes/comment'))
+app.use('/contact', require('./routes/contact'))
+app.use('/utils', require('./routes/utils'))
 
 
 

@@ -40,6 +40,8 @@ app.use('/api/project', require('./routes/project'))
 app.use('/api/blog', require('./routes/blog'))
 app.use('/api/comment', require('./routes/comment'))
 app.use('/api/contact', require('./routes/contact'))
+app.use('/api/utils', require('./routes/utils'))
+
 
 
 

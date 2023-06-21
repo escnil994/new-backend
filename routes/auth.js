@@ -1,10 +1,11 @@
-const { newUser, loginUser, revalidateToken, getUser, changePassword, resetPassword} = require('../controllers/auth')
+const { newUser, loginUser, revalidateToken, getUser, changePassword, resetPassword, ValidateToken} = require('../controllers/auth')
 const { validateFields } = require('../middlewares/validate-fields')
 
 
 const { Router } = require('express')
 const { check } = require('express-validator')
 const {ValidateJwt} = require("../middlewares/validate-jwt");
+const {updatePost} = require("../controllers/blog");
 
 const router = Router()
 
@@ -36,6 +37,9 @@ router.put('/reset-password/:id', [
     check('password1', 'La contraseña es requerida').isLength({min: 6}),
     validateFields
 ], resetPassword )
+
+router.get('/validate-token/', ValidateJwt, ValidateToken)
+
 
 module.exports = router
 

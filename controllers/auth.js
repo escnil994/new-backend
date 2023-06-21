@@ -88,15 +88,15 @@ const loginUser = async (req, res) => {
             })
         }
 
+        const user = await User.findById(dbUser._id, '_id email name role')
 
         const token = await generateJWT(dbUser.id, dbUser.name)
 
         return res.status(200).json({
             ok: true,
             msg: 'Sesión iniciada correctamente',
+            user,
             token,
-            name: dbUser.name,
-            email: dbUser.email
         })
 
 
@@ -311,11 +311,53 @@ const getInfo = async (request, response) => {
 }
 
 
+const ValidateToken = async (req, res) => {
+
+    try{
+    const {'x-token': token} =  await  req.headers
+
+    const tokenInfo = await convertToken(token)
+
+
+    const uid = tokenInfo.id
+
+    const newToken = await generateJWT(uid)
+
+    const user = await User.findById(uid)
+
+    if (!user) {
+        return res.status(404).json({
+            ok: false,
+            msg: 'User not found'
+        })
+    }
+
+    const {name, email, id} = await  user
+
+    return res.status(200).json({
+        ok: true,
+        msg: 'Token is valid',
+        token: newToken,
+        name,
+        email,
+        id
+    })
+        } catch (e) {
+        return res.status(500).json({
+            ok: false,
+            msg: 'Unknown Error, Talk to the admin'
+        })
+    }
+
+}
+
+
 module.exports = {
     newUser,
     loginUser,
     revalidateToken,
     getUser,
     changePassword,
-    resetPassword
+    resetPassword,
+    ValidateToken
 }

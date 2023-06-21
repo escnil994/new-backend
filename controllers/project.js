@@ -14,7 +14,7 @@ const getProjects = async (req, res = response) => {
 
     try {
         
-        const getProjects = await Project.find().sort('date').limit(limit).skip(from)
+        const getProjects = await Project.find().sort('-date').limit(limit).skip(from)
         
 
 
@@ -300,7 +300,6 @@ const uploadFiles = async (req, res) => {
 
 
         } catch (error) {
-            console.log(error);
 
             return res.status(400).json({
                 ok: false,

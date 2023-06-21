@@ -17,7 +17,6 @@ const uploadImage = async (filePath) => {
 function deleteImage(image) {
 
   cloudinary.uploader.destroy(image, function (rs) {
-    console.log(rs)
   })
 }
 

@@ -14,11 +14,13 @@ const router = Router()
 
 
 var utilsSchema = Schema({
-	image_01: String,
-	image_02: String
 
 })
 
+var skillsSchema = Schema({
+	
+
+})
 
 
 router.get('/image/', async (req, res) =>{
@@ -28,6 +30,32 @@ router.get('/image/', async (req, res) =>{
 
 	res.json({
 		images
+	})
+
+
+})
+
+
+router.get('/skills/', async (req, res) =>{
+	const Utils = model( 'Skills',skillsSchema);
+
+	const skills = await Utils.find()
+
+	res.json({
+		skills
+	})
+
+
+})
+
+const dcSchema = Schema({})
+router.get('/dc/', async (req, res) =>{
+	const Utils = model( 'dc', dcSchema)
+
+	const dc = await Utils.find()
+
+	res.json({
+		dc
 	})
 
 

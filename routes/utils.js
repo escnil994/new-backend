@@ -1,11 +1,8 @@
 
-const { Router } = require('express')
-
-const { model, Schema, default: mongoose } = require('mongoose')
-
+const { Router } = require('express');
+const { Schema, model } = require('mongoose');
 
 
-const { contactToMe } = require('../controllers/contact')
 
 
 const router = Router()
@@ -17,10 +14,7 @@ var utilsSchema = Schema({
 
 })
 
-var skillsSchema = Schema({
-	
 
-})
 
 
 router.get('/image/', async (req, res) =>{
@@ -35,18 +29,6 @@ router.get('/image/', async (req, res) =>{
 
 })
 
-
-router.get('/skills/', async (req, res) =>{
-	const Utils = model( 'Skills',skillsSchema);
-
-	const skills = await Utils.find()
-
-	res.json({
-		skills
-	})
-
-
-})
 
 const dcSchema = Schema({})
 router.get('/dc/', async (req, res) =>{

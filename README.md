@@ -1,29 +1,8 @@
 # new-backend
 
+Backend using Node JS Express y Mongo DB
 
-const newComment = new Comment(req.body);
 
-      const commentSaved = await newComment.save();
+To run this project, please use contact to me. I have some recomendations about it because some of this will work if you have some especial configurations
 
-      if (!commentSaved) {
-        return res.status(404).json({
-          ok: false,
-          msg: "El comentario no ha podido guardarse",
-        });
-      } else {
-        send(
-          commentSaved.email,
-          "Gracias por tu commentario!!!",
-          contentHTML(commentSaved)
-        );
-        send(
-          "escnil994@nilson-escobar.com",
-          "ALERTA, NUEVO COMENTARIO",
-          contenido(commentSaved)
-        );
-
-        return res.status(200).json({
-          ok: true,
-          comment: commentSaved,
-        });
-      }
+* npm run dev to start
